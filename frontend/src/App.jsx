@@ -2,15 +2,20 @@ import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
+import Hero from './components/Hero'
+import FeaturedProperties from './components/FeaturedProperties'
+import HowItWorks from './components/HowItWorks'
+import TrustSection from './components/TrustSection'
+import FinalCTA from './components/FinalCTA'
+
 function Home() {
   return (
-    <div className="flex-grow bg-bg-off-white px-10 lg:px-20 py-20">
-      <h1 className="text-5xl font-bold text-text-main">
-        Landing Page placeholder
-      </h1>
-      <p className="text-xl text-gray-600 mt-4">
-        Feature by feature implementation in progress...
-      </p>
+    <div className="flex flex-col">
+      <Hero />
+      <FeaturedProperties />
+      <HowItWorks />
+      <TrustSection />
+      <FinalCTA />
     </div>
   )
 }
