@@ -1,10 +1,11 @@
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 function Home() {
   return (
-    <div className="min-h-screen bg-[#FAF9F6] px-10 lg:px-20 py-20">
-      <h1 className="text-5xl font-bold text-[#2C2C2C]">
+    <div className="flex-grow bg-bg-off-white px-10 lg:px-20 py-20">
+      <h1 className="text-5xl font-bold text-text-main">
         Landing Page placeholder
       </h1>
       <p className="text-xl text-gray-600 mt-4">
@@ -16,11 +17,14 @@ function Home() {
 
 function App() {
   return (
-    <div className="min-h-screen bg-[#FAF9F6]">
+    <div className="min-h-screen flex flex-col bg-bg-off-white">
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </main>
+      <Footer />
     </div>
   )
 }
