@@ -8,10 +8,10 @@ Designed with a warm, earthy UI, Rentora focuses on trust, clarity, and better d
 ## 🚀 Live Demo & Links
 
 🌐 **Frontend (Live App):**
-https://your-frontend-deployed-link.com
+
 
 🖥️ **Backend:**
-https://your-backend-api-link.com
+
 
 🎨 **Figma Prototype:**
 https://umber-basic-33650412.figma.site/
