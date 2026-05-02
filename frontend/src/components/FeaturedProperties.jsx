@@ -27,27 +27,27 @@ const FeaturedProperties = () => {
   }, []);
 
   return (
-    <section className="py-24 bg-white px-10 lg:px-20">
+    <section className="py-16 md:py-24 bg-white px-6 md:px-10 lg:px-20">
       <div className="max-w-[1440px] mx-auto">
-        <div className="flex justify-between items-end mb-12">
-          <div className="space-y-2">
-            <h2 className="text-4xl font-bold text-text-main">Featured Properties</h2>
-            <p className="text-gray-500">Highly rated homes in your area</p>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 md:mb-12 gap-4">
+          <div className="space-y-1 md:space-y-2">
+            <h2 className="text-3xl md:text-4xl font-bold text-text-main tracking-tight">Featured Properties</h2>
+            <p className="text-gray-500 text-sm md:text-base font-medium">Highly rated homes in your area</p>
           </div>
-          <Link to="/explore" className="text-brand-green font-bold flex items-center gap-1 hover:underline">
+          <Link to="/explore" className="text-brand-green font-bold flex items-center gap-1 hover:underline text-sm md:text-base">
             View all 
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </Link>
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {[1, 2, 3, 4].map(i => (
-              <div key={i} className="bg-gray-100 h-[400px] rounded-3xl animate-pulse"></div>
+              <div key={i} className="bg-gray-100 h-[350px] md:h-[400px] rounded-[2rem] md:rounded-3xl animate-pulse"></div>
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {properties.map((prop) => (
               <PropertyCard 
                 key={prop._id} 
