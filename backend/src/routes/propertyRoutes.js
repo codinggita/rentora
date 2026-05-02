@@ -5,6 +5,6 @@ const auth = require('../middleware/authMiddleware');
 
 router.get('/', getProperties);
 router.get('/:id', getPropertyById);
-router.post('/', auth, createProperty);
+router.post('/', createProperty);
 
 module.exports = router;

@@ -10,37 +10,17 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setError('');
     setLoading(true);
-
-    try {
-      const response = await fetch(`${API_BASE_URL}/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Login failed');
-      }
-
-      // Store token
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
-
-      // Redirect to home or dashboard
-      navigate('/');
-    } catch (err) {
-      setError(err.message);
-    } finally {
+    
+    // Mock successful login
+    setTimeout(() => {
+      localStorage.setItem('user', JSON.stringify({ username: email.split('@')[0] || 'User', email }));
+      localStorage.setItem('token', 'mock-token');
       setLoading(false);
-    }
+      navigate('/dashboard');
+    }, 800);
   };
 
   return (

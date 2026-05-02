@@ -4,11 +4,9 @@ import SEO from '../components/SEO';
 import Footer from '../components/Footer';
 
 const ProfileSettings = () => {
-  const user = JSON.parse(localStorage.getItem('user')) || { username: 'John Doe', email: 'john@example.com' };
-  
   const [formData, setFormData] = useState({
-    fullName: user.username,
-    email: user.email,
+    fullName: 'Rentora User',
+    email: 'guest@rentora.com',
     currentPassword: '',
     newPassword: '',
     confirmPassword: ''
@@ -53,7 +51,7 @@ const ProfileSettings = () => {
                 {/* Profile Picture Section */}
                 <div className="flex flex-col md:flex-row items-center gap-8 pb-10 border-b border-gray-100">
                   <div className="w-24 h-24 md:w-32 md:h-32 bg-brand-green rounded-full flex items-center justify-center text-white text-4xl md:text-5xl font-bold shadow-xl shadow-brand-green/20 relative">
-                    {user.username.substring(0, 2).toUpperCase()}
+                    RT
                     <button type="button" className="absolute bottom-0 right-0 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-brand-green hover:scale-110 transition-transform border border-gray-100">
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>

@@ -43,7 +43,6 @@ const createProperty = async (req, res) => {
       location,
       images,
       tags,
-      owner: req.user.id // This comes from auth middleware
     });
 
     const savedProperty = await property.save();

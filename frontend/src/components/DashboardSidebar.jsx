@@ -2,9 +2,9 @@ import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const DashboardSidebar = () => {
-  const user = JSON.parse(localStorage.getItem('user')) || { username: 'John Doe' };
   const navigate = useNavigate();
   const location = useLocation();
+  const user = JSON.parse(localStorage.getItem('user')) || { username: 'Rentora User' };
 
   const menuItems = [
     { name: 'Overview', path: '/dashboard', icon: 'M4 6h16M4 12h16M4 18h16' },
@@ -14,8 +14,8 @@ const DashboardSidebar = () => {
   ];
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
     navigate('/login');
   };
 
@@ -26,7 +26,7 @@ const DashboardSidebar = () => {
           {user.username.substring(0, 2).toUpperCase()}
         </div>
         <h2 className="text-lg md:text-xl font-bold text-text-main">{user.username}</h2>
-        <p className="text-gray-400 text-xs md:text-sm font-medium">Member since 2025</p>
+        <p className="text-gray-400 text-xs md:text-sm font-medium">Guest Session</p>
         
         <div className="w-full h-[1px] bg-gray-100 my-6 md:my-8"></div>
         
@@ -47,15 +47,6 @@ const DashboardSidebar = () => {
               <span className="text-sm md:text-base">{item.name}</span>
             </button>
           ))}
-          <button 
-            onClick={handleLogout}
-            className="flex-shrink-0 lg:w-full flex items-center gap-3 md:gap-4 px-4 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl font-bold transition-all whitespace-nowrap text-brand-terracotta hover:bg-red-50"
-          >
-            <svg width="18" height="18" className="md:w-5 md:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-            </svg>
-            <span className="text-sm md:text-base">Log Out</span>
-          </button>
         </nav>
       </div>
     </aside>
