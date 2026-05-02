@@ -51,7 +51,10 @@ const Navbar = () => {
 
       {/* Nav Links (Desktop) */}
       <div className="hidden lg:flex items-center gap-12">
-        {['Home', 'Explore', 'Reviews', 'About'].map((item) => (
+        {['Home', 'Explore', 'Dashboard', 'Reviews', 'About'].filter(item => {
+          if (item === 'Dashboard' || item === 'Reviews') return !!user;
+          return true;
+        }).map((item) => (
           <Link 
             key={item}
             to={item === 'Home' ? '/' : `/${item.toLowerCase()}`} 
@@ -111,7 +114,10 @@ const Navbar = () => {
       {/* Mobile/Tablet Drawer */}
       <div className={`fixed inset-0 bg-white z-[105] transition-transform duration-300 lg:hidden ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className="flex flex-col h-full p-10 pt-32 space-y-8">
-          {['Home', 'Explore', 'Reviews', 'About'].map((item) => (
+          {['Home', 'Explore', 'Dashboard', 'Reviews', 'About'].filter(item => {
+            if (item === 'Dashboard' || item === 'Reviews') return !!user;
+            return true;
+          }).map((item) => (
             <Link 
               key={item}
               to={item === 'Home' ? '/' : `/${item.toLowerCase()}`} 

@@ -10,6 +10,7 @@ import About from './pages/About'
 import PropertyDetails from './pages/PropertyDetails'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import Dashboard from './pages/Dashboard'
 import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
@@ -30,6 +31,11 @@ function App() {
           <Route path="/" element={token ? <Home /> : <Landing />} />
           
           <Route path="/explore" element={<Explore />} />
+          <Route path="/dashboard" element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
           <Route path="/reviews" element={
             <ProtectedRoute>
               <Reviews />
