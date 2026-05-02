@@ -9,15 +9,21 @@ import About from './pages/About'
 import PropertyDetails from './pages/PropertyDetails'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
   return (
     <div className="min-h-screen flex flex-col bg-bg-off-white">
+      <Navbar />
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/explore" element={<Explore />} />
-          <Route path="/reviews" element={<Reviews />} />
+          <Route path="/reviews" element={
+            <ProtectedRoute>
+              <Reviews />
+            </ProtectedRoute>
+          } />
           <Route path="/about" element={<About />} />
           <Route path="/property/:id" element={<PropertyDetails />} />
           <Route path="/login" element={<Login />} />
@@ -25,6 +31,7 @@ function App() {
         </Routes>
       </main>
     </div>
+    
   )
 }
 

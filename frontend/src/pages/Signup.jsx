@@ -1,7 +1,47 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Registration failed');
+      }
+
+      // Store token and user (auto login)
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+
+      // Redirect to home
+      navigate('/');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-bg-off-white flex flex-col items-center justify-center py-12 px-6">
       {/* Logo */}
@@ -23,10 +63,16 @@ const Signup = () => {
 
       {/* Signup Card */}
       <div className="bg-white w-full max-w-[480px] rounded-[32px] shadow-[0_10px_40px_-15px_rgba(0,0,0,0.08)] p-10 md:p-12">
-        <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+        <form className="space-y-6" onSubmit={handleSubmit}>
+          {error && (
+            <div className="bg-red-50 text-red-500 p-4 rounded-xl text-sm font-medium border border-red-100">
+              {error}
+            </div>
+          )}
+
           {/* Name Field */}
           <div className="space-y-2">
-            <label className="text-sm font-bold text-text-main block ml-1">Full Name</label>
+            <label className="text-sm font-bold text-text-main block ml-1">Username</label>
             <div className="relative">
               <span className="absolute left-5 top-1/2 -translate-y-1/2 text-[#A39A92]">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -35,7 +81,10 @@ const Signup = () => {
               </span>
               <input 
                 type="text" 
-                placeholder="John Doe"
+                placeholder="johndoe"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
                 className="w-full bg-brand-sand border-none px-12 py-4 rounded-2xl text-text-main placeholder:text-[#A39A92] focus:ring-2 focus:ring-brand-green/20 outline-none transition-all"
               />
             </div>
@@ -53,6 +102,9 @@ const Signup = () => {
               <input 
                 type="email" 
                 placeholder="your@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
                 className="w-full bg-brand-sand border-none px-12 py-4 rounded-2xl text-text-main placeholder:text-[#A39A92] focus:ring-2 focus:ring-brand-green/20 outline-none transition-all"
               />
             </div>
@@ -70,6 +122,9 @@ const Signup = () => {
               <input 
                 type="password" 
                 placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
                 className="w-full bg-brand-sand border-none px-12 py-4 rounded-2xl text-text-main placeholder:text-[#A39A92] focus:ring-2 focus:ring-brand-green/20 outline-none transition-all"
               />
             </div>
@@ -80,6 +135,7 @@ const Signup = () => {
             <input 
               type="checkbox" 
               id="terms" 
+              required
               className="mt-1 w-4 h-4 rounded bg-brand-forest border-none focus:ring-0 cursor-pointer accent-brand-forest" 
             />
             <label htmlFor="terms" className="text-sm text-[#8B7E74] leading-tight">
@@ -88,8 +144,12 @@ const Signup = () => {
           </div>
 
           {/* Sign Up Button */}
-          <button className="w-full bg-brand-terracotta text-white py-4 rounded-2xl font-bold text-lg hover:shadow-lg hover:opacity-90 transition-all active:scale-[0.98]">
-            Create Account
+          <button 
+            type="submit"
+            disabled={loading}
+            className="w-full bg-brand-terracotta text-white py-4 rounded-2xl font-bold text-lg hover:shadow-lg hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {loading ? 'Creating Account...' : 'Create Account'}
           </button>
 
           {/* Login Link */}

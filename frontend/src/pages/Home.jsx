@@ -10,7 +10,6 @@ import Footer from '../components/Footer';
 const Home = () => {
   return (
     <div className="flex flex-col">
-      <Navbar />
       <Hero />
       <FeaturedProperties />
       <HowItWorks />

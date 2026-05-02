@@ -1,7 +1,46 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Login failed');
+      }
+
+      // Store token
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+
+      // Redirect to home or dashboard
+      navigate('/');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-bg-off-white flex flex-col items-center justify-center py-12 px-6">
       {/* Logo */}
@@ -23,7 +62,13 @@ const Login = () => {
 
       {/* Login Card */}
       <div className="bg-white w-full max-w-[480px] rounded-[32px] shadow-[0_10px_40px_-15px_rgba(0,0,0,0.08)] p-10 md:p-12">
-        <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+        <form className="space-y-6" onSubmit={handleSubmit}>
+          {error && (
+            <div className="bg-red-50 text-red-500 p-4 rounded-xl text-sm font-medium border border-red-100">
+              {error}
+            </div>
+          )}
+          
           {/* Email Field */}
           <div className="space-y-2">
             <label className="text-sm font-bold text-text-main block ml-1">Email</label>
@@ -36,6 +81,9 @@ const Login = () => {
               <input 
                 type="email" 
                 placeholder="your@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
                 className="w-full bg-brand-sand border-none px-12 py-4 rounded-2xl text-text-main placeholder:text-[#A39A92] focus:ring-2 focus:ring-brand-green/20 outline-none transition-all"
               />
             </div>
@@ -53,6 +101,9 @@ const Login = () => {
               <input 
                 type="password" 
                 placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
                 className="w-full bg-brand-sand border-none px-12 py-4 rounded-2xl text-text-main placeholder:text-[#A39A92] focus:ring-2 focus:ring-brand-green/20 outline-none transition-all"
               />
             </div>
@@ -68,12 +119,16 @@ const Login = () => {
               />
               <label htmlFor="remember" className="text-sm font-medium text-text-main cursor-pointer">Remember me</label>
             </div>
-            <button className="text-sm font-bold text-brand-green hover:underline">Forgot password?</button>
+            <button type="button" className="text-sm font-bold text-brand-green hover:underline">Forgot password?</button>
           </div>
 
           {/* Sign In Button */}
-          <button className="w-full bg-brand-terracotta text-white py-4 rounded-2xl font-bold text-lg hover:shadow-lg hover:opacity-90 transition-all active:scale-[0.98]">
-            Sign In
+          <button 
+            type="submit"
+            disabled={loading}
+            className="w-full bg-brand-terracotta text-white py-4 rounded-2xl font-bold text-lg hover:shadow-lg hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {loading ? 'Signing In...' : 'Sign In'}
           </button>
 
           {/* Sign Up Link */}
