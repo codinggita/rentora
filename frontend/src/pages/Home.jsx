@@ -14,7 +14,7 @@ const Home = () => {
       <FeaturedProperties />
       <HowItWorks />
       <TrustSection />
-      <FinalCTA />
+      {/* <FinalCTA /> */}
       <Footer />
     </div>
   );
