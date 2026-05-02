@@ -7,8 +7,6 @@ import DashboardSidebar from '../components/DashboardSidebar';
 import Footer from '../components/Footer';
 
 const Dashboard = () => {
-  const user = JSON.parse(localStorage.getItem('user')) || { username: 'John Doe' };
-  
   // Mock Data for Charts
   const ratingsData = [
     { name: '5 Star', count: 45 },

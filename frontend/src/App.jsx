@@ -17,11 +17,10 @@ import ProfileSettings from './pages/ProfileSettings'
 import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
-  const token = localStorage.getItem('token');
   const location = useLocation();
 
-  // Hide navbar on Landing (unauthenticated root), Login, and Signup pages
-  const hideNavbar = (!token && location.pathname === '/') || 
+  // Hide navbar on Landing, Login, and Signup pages
+  const hideNavbar = location.pathname === '/' || 
                      location.pathname === '/login' || 
                      location.pathname === '/signup';
 
@@ -30,48 +29,25 @@ function App() {
       {!hideNavbar && <Navbar />}
       <main className="flex-grow">
         <Routes>
-          {/* Landing page for fresh users, Home dashboard for logged in users */}
-          <Route path="/" element={token ? <Home /> : <Landing />} />
-          
+          <Route path="/" element={<Landing />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/explore" element={<Explore />} />
-          <Route path="/dashboard" element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          } />
-          <Route path="/my-reviews" element={
-            <ProtectedRoute>
-              <MyReviews />
-            </ProtectedRoute>
-          } />
-          <Route path="/saved-properties" element={
-            <ProtectedRoute>
-              <SavedProperties />
-            </ProtectedRoute>
-          } />
-          <Route path="/settings" element={
-            <ProtectedRoute>
-              <ProfileSettings />
-            </ProtectedRoute>
-          } />
-          <Route path="/reviews" element={
-            <ProtectedRoute>
-              <Reviews />
-            </ProtectedRoute>
-          } />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/my-reviews" element={<MyReviews />} />
+          <Route path="/saved-properties" element={<SavedProperties />} />
+          <Route path="/settings" element={<ProfileSettings />} />
+          <Route path="/reviews" element={<Reviews />} />
           <Route path="/about" element={<About />} />
           <Route path="/property/:id" element={<PropertyDetails />} />
           
-          {/* Prevent logged in users from seeing Login/Signup */}
-          <Route path="/login" element={!token ? <Login /> : <Navigate to="/" replace />} />
-          <Route path="/signup" element={!token ? <Signup /> : <Navigate to="/" replace />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           
-          {/* Catch all */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
     </div>
-  )
+  );
 }
 
 export default App
