@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://rentora.com/</loc>
+    <loc>https://rentora-tawny.vercel.app/</loc>
     <lastmod>2026-05-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://rentora.com/explore</loc>
+    <loc>https://rentora-tawny.vercel.app/explore</loc>
     <lastmod>2026-05-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://rentora.com/dashboard</loc>
+    <loc>https://rentora-tawny.vercel.app/dashboard</loc>
     <lastmod>2026-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://rentora.com/my-reviews</loc>
+    <loc>https://rentora-tawny.vercel.app/my-reviews</loc>
     <lastmod>2026-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://rentora.com/saved-properties</loc>
+    <loc>https://rentora-tawny.vercel.app/saved-properties</loc>
     <lastmod>2026-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://rentora.com/settings</loc>
+    <loc>https://rentora-tawny.vercel.app/settings</loc>
     <lastmod>2026-05-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://rentora.com/reviews</loc>
+    <loc>https://rentora-tawny.vercel.app/reviews</loc>
     <lastmod>2026-05-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://rentora.com/about</loc>
+    <loc>https://rentora-tawny.vercel.app/about</loc>
     <lastmod>2026-05-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
