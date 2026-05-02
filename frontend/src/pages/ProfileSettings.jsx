@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 const ProfileSettings = () => {
   const [formData, setFormData] = useState({
     fullName: 'Rentora User',
-    email: 'guest@rentora.com',
+    email: 'guest@rentora-tawny.vercel.app',
     currentPassword: '',
     newPassword: '',
     confirmPassword: ''
