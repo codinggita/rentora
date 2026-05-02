@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Footer from '../components/Footer';
+import API_BASE_URL from '../api/config';
 
 const PropertyDetails = () => {
   const { id } = useParams();
@@ -11,7 +12,7 @@ const PropertyDetails = () => {
   useEffect(() => {
     const fetchProperty = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/properties/${id}`);
+        const response = await fetch(`${API_BASE_URL}/properties/${id}`);
         const data = await response.json();
         
         if (!response.ok) {
